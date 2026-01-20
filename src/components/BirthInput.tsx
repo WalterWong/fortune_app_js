@@ -36,46 +36,45 @@ export default function BirthInput({ onCalculate, isLoading }: BirthInputProps) 
 
   const handleHourChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const input = e.target.value.replace(/\D/g, "").slice(0, 2);
-    const h = parseInt(input, 10);
 
     if (input === "") {
       setHour("");
       return;
     }
 
-    // Auto-set AM/PM based on hour input
+    // If only 1 digit entered, just store it and wait for more
+    if (input.length === 1) {
+      setHour(input);
+      return;
+    }
+
+    // 2 digits entered - do the conversion
+    const h = parseInt(input, 10);
+
     if (!isNaN(h)) {
       if (h === 0) {
         // 00 means midnight = 12 AM
         setHour("12");
         setAmpm("AM");
-        // Auto-focus minute input after conversion
-        setTimeout(() => minuteInputRef.current?.focus(), 0);
-        return;
       } else if (h >= 1 && h <= 11) {
+        // 01-11 = 1-11 AM (remove leading zero)
+        setHour(h.toString());
         setAmpm("AM");
-      } else if (h >= 12 && h <= 23) {
-        setAmpm("PM");
-        // Convert 13-23 to 1-11 PM, keep 12 as 12 PM
-        if (h > 12) {
-          setHour((h - 12).toString());
-          // Auto-focus minute input after conversion
-          setTimeout(() => minuteInputRef.current?.focus(), 0);
-          return;
-        }
-      }
-
-      // Limit to 1-12 for display
-      if (h > 12) {
+      } else if (h === 12) {
+        // 12 = 12 PM (noon)
         setHour("12");
+        setAmpm("PM");
+      } else if (h >= 13 && h <= 23) {
+        // 13-23 = 1-11 PM
+        setHour((h - 12).toString());
+        setAmpm("PM");
       } else {
-        setHour(input);
+        // Invalid (24+), cap at 12
+        setHour("12");
       }
 
-      // Auto-focus minute input when 2 digits entered
-      if (input.length === 2) {
-        setTimeout(() => minuteInputRef.current?.focus(), 0);
-      }
+      // Auto-focus minute input after 2 digits
+      setTimeout(() => minuteInputRef.current?.focus(), 0);
     }
   };
 
