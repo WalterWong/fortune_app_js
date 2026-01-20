@@ -55,18 +55,18 @@ export default function Home() {
   const currentAge = birthday ? calculateAge(parseInt(birthday.split("-")[0])) : undefined;
 
   return (
-    <main className="min-h-screen bg-gray-50 py-8 px-4">
+    <main className="min-h-screen bg-slate-100 py-8 px-4">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">DestinyAI 八字排盤</h1>
-          <p className="text-gray-600">專業八字命理分析工具 · 純前端計算</p>
+          <p className="text-gray-700">專業八字命理分析工具 · 純前端計算</p>
         </div>
 
         {!result ? (
           /* Input Form */
-          <div className="bg-white rounded-lg shadow-md p-8 max-w-md mx-auto">
-            <h2 className="text-xl font-bold text-center mb-6">輸入出生資料</h2>
+          <div className="bg-white rounded-lg shadow-md p-8 max-w-md mx-auto border border-gray-200">
+            <h2 className="text-xl font-bold text-gray-900 text-center mb-6">輸入出生資料</h2>
             <BirthInput onCalculate={handleCalculate} isLoading={isLoading} />
           </div>
         ) : (
@@ -76,30 +76,30 @@ export default function Home() {
             <div className="flex justify-end">
               <button
                 onClick={handleReset}
-                className="px-4 py-2 text-gray-600 hover:text-gray-900 transition-colors"
+                className="px-4 py-2 text-gray-700 hover:text-gray-900 font-medium transition-colors"
               >
                 ← 重新排盤
               </button>
             </div>
 
             {/* Birth Info */}
-            <div className="bg-white rounded-lg shadow-md p-6">
-              <div className="flex flex-wrap gap-4 text-sm">
+            <div className="bg-white rounded-lg shadow-md p-6 border border-gray-200">
+              <div className="flex flex-wrap gap-4 text-sm text-gray-900">
                 <div>
-                  <span className="text-gray-600">性別: </span>
-                  <span className="font-medium">{gender}</span>
+                  <span className="text-gray-700 font-medium">性別: </span>
+                  <span className="font-semibold">{gender}</span>
                 </div>
                 <div>
-                  <span className="text-gray-600">公曆: </span>
-                  <span className="font-medium">{birthday}</span>
+                  <span className="text-gray-700 font-medium">公曆: </span>
+                  <span className="font-semibold">{birthday}</span>
                 </div>
                 <div>
-                  <span className="text-gray-600">農曆: </span>
-                  <span className="font-medium">{result.birthInfo.lunarDate}</span>
+                  <span className="text-gray-700 font-medium">農曆: </span>
+                  <span className="font-semibold">{result.birthInfo.lunarDate}</span>
                 </div>
                 <div>
-                  <span className="text-gray-600">生肖: </span>
-                  <span className="font-medium">{result.zodiac}</span>
+                  <span className="text-gray-700 font-medium">生肖: </span>
+                  <span className="font-semibold">{result.zodiac}</span>
                 </div>
               </div>
             </div>
@@ -131,31 +131,31 @@ export default function Home() {
               result.relationships.xing.length > 0 ||
               result.relationships.hai.length > 0 ||
               result.relationships.po.length > 0) && (
-              <div className="bg-white rounded-lg shadow-md p-6">
-                <h2 className="text-xl font-bold mb-4">地支關係</h2>
+              <div className="bg-white rounded-lg shadow-md p-6 border border-gray-200">
+                <h2 className="text-xl font-bold text-gray-900 mb-4">地支關係</h2>
                 <div className="flex flex-wrap gap-2">
                   {result.relationships.he.map((r, i) => (
-                    <span key={`he-${i}`} className="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm">
+                    <span key={`he-${i}`} className="px-3 py-1 bg-green-200 text-green-900 rounded-full text-sm font-medium">
                       {r}
                     </span>
                   ))}
                   {result.relationships.chong.map((r, i) => (
-                    <span key={`chong-${i}`} className="px-3 py-1 bg-red-100 text-red-700 rounded-full text-sm">
+                    <span key={`chong-${i}`} className="px-3 py-1 bg-red-200 text-red-900 rounded-full text-sm font-medium">
                       {r}
                     </span>
                   ))}
                   {result.relationships.xing.map((r, i) => (
-                    <span key={`xing-${i}`} className="px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-sm">
+                    <span key={`xing-${i}`} className="px-3 py-1 bg-orange-200 text-orange-900 rounded-full text-sm font-medium">
                       {r}
                     </span>
                   ))}
                   {result.relationships.hai.map((r, i) => (
-                    <span key={`hai-${i}`} className="px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full text-sm">
+                    <span key={`hai-${i}`} className="px-3 py-1 bg-amber-200 text-amber-900 rounded-full text-sm font-medium">
                       {r}
                     </span>
                   ))}
                   {result.relationships.po.map((r, i) => (
-                    <span key={`po-${i}`} className="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm">
+                    <span key={`po-${i}`} className="px-3 py-1 bg-purple-200 text-purple-900 rounded-full text-sm font-medium">
                       {r}
                     </span>
                   ))}
@@ -181,7 +181,7 @@ export default function Home() {
             )}
 
             {/* Footer */}
-            <div className="text-center text-sm text-gray-500 mt-8">
+            <div className="text-center text-sm text-gray-700 mt-8">
               <p>本工具僅供參考，請勿迷信</p>
               <p className="mt-1">計算結果基於 lunar-typescript 農曆庫</p>
             </div>

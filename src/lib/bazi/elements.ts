@@ -95,29 +95,43 @@ export function getFavorableElements(
 }
 
 /**
- * Get element color for display
+ * Get element color for display (text color)
  */
 export function getElementColor(element: Element): string {
   const colors: Record<Element, string> = {
-    金: "#FFD700", // Gold
-    木: "#228B22", // Forest Green
-    水: "#1E90FF", // Dodger Blue
-    火: "#FF4500", // Orange Red
-    土: "#DEB887", // Burlywood
+    金: "#B8860B", // Dark Goldenrod (darker for contrast)
+    木: "#166534", // Green-800
+    水: "#1D4ED8", // Blue-700
+    火: "#B91C1C", // Red-700
+    土: "#92400E", // Amber-800
   };
   return colors[element];
 }
 
 /**
- * Get element background color (lighter version)
+ * Get element background color (with better contrast)
  */
 export function getElementBgColor(element: Element): string {
   const colors: Record<Element, string> = {
-    金: "#FFFACD", // Lemon Chiffon
-    木: "#90EE90", // Light Green
-    水: "#ADD8E6", // Light Blue
-    火: "#FFB6C1", // Light Pink
-    土: "#F5DEB3", // Wheat
+    金: "#FCD34D", // Amber-300 (golden yellow)
+    木: "#86EFAC", // Green-300
+    水: "#93C5FD", // Blue-300
+    火: "#FCA5A5", // Red-300
+    土: "#FDBA74", // Orange-300
+  };
+  return colors[element];
+}
+
+/**
+ * Get element text color for use on element background
+ */
+export function getElementTextColor(element: Element): string {
+  const colors: Record<Element, string> = {
+    金: "#78350F", // Amber-900
+    木: "#14532D", // Green-900
+    水: "#1E3A8A", // Blue-900
+    火: "#7F1D1D", // Red-900
+    土: "#7C2D12", // Orange-900
   };
   return colors[element];
 }
