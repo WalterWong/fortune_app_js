@@ -218,7 +218,9 @@ function calculateLiunian(startYear: number, count: number): LiuNian[] {
 
   for (let i = 0; i < count; i++) {
     const year = startYear + i;
-    const solar = Solar.fromYmd(year, 2, 4); // Use Feb 4 (around LiChun)
+    // Use Feb 10 to ensure we're definitely after LiChun (立春)
+    // LiChun typically falls between Feb 3-5, using Feb 10 is safe
+    const solar = Solar.fromYmd(year, 2, 10);
     const lunar = solar.getLunar();
     const yearGanZhi = lunar.getYearInGanZhiExact();
     const gan = yearGanZhi.substring(0, 1) as Gan;

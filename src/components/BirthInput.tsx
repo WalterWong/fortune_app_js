@@ -10,9 +10,91 @@ interface BirthInputProps {
 
 export default function BirthInput({ onCalculate, isLoading }: BirthInputProps) {
   const [birthday, setBirthday] = useState("");
-  const [birthTime, setBirthTime] = useState("");
+  const [hour, setHour] = useState("");
+  const [minute, setMinute] = useState("");
+  const [ampm, setAmpm] = useState<"AM" | "PM">("AM");
   const [gender, setGender] = useState<Gender>("男");
   const datePickerRef = useRef<HTMLInputElement>(null);
+  const minuteInputRef = useRef<HTMLInputElement>(null);
+
+  // Convert hour/minute/ampm to 24-hour format string (HH:mm)
+  const getBirthTime = (): string | undefined => {
+    if (!hour) return undefined;
+    let h = parseInt(hour, 10);
+    if (isNaN(h)) return undefined;
+
+    // Convert to 24-hour format
+    if (ampm === "AM") {
+      if (h === 12) h = 0; // 12 AM = 00:xx
+    } else {
+      if (h !== 12) h += 12; // PM and not 12 = add 12
+    }
+
+    const m = minute ? parseInt(minute, 10) : 0;
+    return `${h.toString().padStart(2, "0")}:${m.toString().padStart(2, "0")}`;
+  };
+
+  const handleHourChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const input = e.target.value.replace(/\D/g, "").slice(0, 2);
+    const h = parseInt(input, 10);
+
+    if (input === "") {
+      setHour("");
+      return;
+    }
+
+    // Auto-set AM/PM based on hour input
+    if (!isNaN(h)) {
+      if (h === 0) {
+        // 00 means midnight = 12 AM
+        setHour("12");
+        setAmpm("AM");
+        // Auto-focus minute input after conversion
+        setTimeout(() => minuteInputRef.current?.focus(), 0);
+        return;
+      } else if (h >= 1 && h <= 11) {
+        setAmpm("AM");
+      } else if (h >= 12 && h <= 23) {
+        setAmpm("PM");
+        // Convert 13-23 to 1-11 PM, keep 12 as 12 PM
+        if (h > 12) {
+          setHour((h - 12).toString());
+          // Auto-focus minute input after conversion
+          setTimeout(() => minuteInputRef.current?.focus(), 0);
+          return;
+        }
+      }
+
+      // Limit to 1-12 for display
+      if (h > 12) {
+        setHour("12");
+      } else {
+        setHour(input);
+      }
+
+      // Auto-focus minute input when 2 digits entered
+      if (input.length === 2) {
+        setTimeout(() => minuteInputRef.current?.focus(), 0);
+      }
+    }
+  };
+
+  const handleMinuteChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const input = e.target.value.replace(/\D/g, "").slice(0, 2);
+    const m = parseInt(input, 10);
+
+    if (input === "" || isNaN(m)) {
+      setMinute(input);
+      return;
+    }
+
+    // Limit to 0-59
+    if (m > 59) {
+      setMinute("59");
+    } else {
+      setMinute(input);
+    }
+  };
 
   const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const input = e.target.value;
@@ -44,7 +126,7 @@ export default function BirthInput({ onCalculate, isLoading }: BirthInputProps) 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!birthday) return;
-    onCalculate(birthday, birthTime || undefined, gender);
+    onCalculate(birthday, getBirthTime(), gender);
   };
 
   return (
@@ -94,13 +176,54 @@ export default function BirthInput({ onCalculate, isLoading }: BirthInputProps) 
         <label className="block text-sm font-medium text-gray-900 mb-2">
           出生時間 (可選)
         </label>
-        <input
-          type="time"
-          value={birthTime}
-          onChange={(e) => setBirthTime(e.target.value)}
-          className="w-full px-4 py-2 border border-gray-400 rounded-lg bg-white text-gray-900 focus:ring-2 focus:ring-blue-600 focus:border-transparent"
-        />
-        <p className="text-xs text-gray-600 mt-1">不填則默認為中午12:00</p>
+        <div className="flex items-center gap-2">
+          {/* Hour input */}
+          <input
+            type="text"
+            value={hour}
+            onChange={handleHourChange}
+            placeholder="時"
+            maxLength={2}
+            className="w-16 px-3 py-2 border border-gray-400 rounded-lg bg-white text-gray-900 text-center placeholder-gray-500 focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+          />
+          <span className="text-gray-700 font-medium">:</span>
+          {/* Minute input */}
+          <input
+            ref={minuteInputRef}
+            type="text"
+            value={minute}
+            onChange={handleMinuteChange}
+            placeholder="分"
+            maxLength={2}
+            className="w-16 px-3 py-2 border border-gray-400 rounded-lg bg-white text-gray-900 text-center placeholder-gray-500 focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+          />
+          {/* AM/PM toggle */}
+          <div className="flex rounded-lg border border-gray-400 overflow-hidden">
+            <button
+              type="button"
+              onClick={() => setAmpm("AM")}
+              className={`px-3 py-2 text-sm font-medium transition-colors ${
+                ampm === "AM"
+                  ? "bg-blue-600 text-white"
+                  : "bg-white text-gray-700 hover:bg-gray-100"
+              }`}
+            >
+              AM
+            </button>
+            <button
+              type="button"
+              onClick={() => setAmpm("PM")}
+              className={`px-3 py-2 text-sm font-medium transition-colors border-l border-gray-400 ${
+                ampm === "PM"
+                  ? "bg-blue-600 text-white"
+                  : "bg-white text-gray-700 hover:bg-gray-100"
+              }`}
+            >
+              PM
+            </button>
+          </div>
+        </div>
+        <p className="text-xs text-gray-600 mt-1">輸入24小時制自動轉換 (如: 00→12AM, 13→1PM)，不填則默認中午12:00</p>
       </div>
 
       <div>
