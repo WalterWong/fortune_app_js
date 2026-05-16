@@ -1,40 +1,28 @@
-# DestinyAI TypeScript - BaZi Fortune Calculator
+# DestinyAI TypeScript — BaZi Fortune Calculator
 
-A pure client-side TypeScript implementation of BaZi (八字) fortune-telling calculations. All calculations run in the browser - no backend required. Deployable to GitHub Pages.
+A pure client-side TypeScript implementation of BaZi (八字) fortune-telling calculations. All calculations run in the browser — no backend required. Deployable to GitHub Pages. Bilingual UI (中/EN) with an in-built LLM prompt builder that targets ChatGPT, Claude, Gemini, or any other LLM.
 
 ## Features
 
-- **Client-Side BaZi Calculation**: All calculations using `lunar-typescript`
-- **Four Pillars (四柱)**: Year, Month, Day, Hour pillars with hidden stems
-- **Ten Deities (十神)**: Complete ten deity calculations
-- **Five Elements (五行)**: Weighted element scoring with strength analysis
-- **DaYun (大運)**: 10-year luck cycle calculation
-- **LiuNian (流年)**: Yearly fortune display
-- **Prompt Generation**: Ready-to-use prompts for ChatGPT/Claude
-- **Static Export**: Deployable to GitHub Pages
+- **Client-side BaZi calculation** via `lunar-typescript` — no network calls
+- **Four Pillars (四柱)** with hidden stems and NaYin
+- **Ten Deities (十神)** complete map
+- **Five Elements (五行)** weighted scoring + favorable / unfavorable analysis
+- **DaYun (大運)** 10-year cycles with both age range and calendar year range
+- **LiuNian (流年)** 7-year window (previous year + current + next 5)
+- **Bilingual UI** with a 中/EN segmented toggle (persists across reloads)
+- **LLM prompt builder** with separate ZH/EN templates; BaZi characters preserved in both
+- **shadcn/ui** primitives shared with the sibling `destinyai-frontend` app
 
 ## Quick Start
 
-### Development
-
 ```bash
-# Install dependencies
 npm install
-
-# Start development server
-npm run dev
-
-# Open http://localhost:3000
-```
-
-### Production Build
-
-```bash
-# Build for production (static export)
-npm run build
-
-# Preview static build locally
-npx serve out
+npm run dev        # http://localhost:3000
+npm run build      # static export → /out
+npm run lint
+npm test           # vitest
+npx serve out      # preview the static build
 ```
 
 ## Project Structure
@@ -43,87 +31,99 @@ npx serve out
 fortune_app_js/
 ├── src/
 │   ├── app/
-│   │   └── page.tsx              # Main application page
+│   │   ├── layout.tsx              # wraps tree in LocaleProvider
+│   │   ├── page.tsx                # main UI + 中/EN toggle + result panels
+│   │   └── globals.css             # shadcn token set (light + dark)
 │   ├── components/
-│   │   ├── BirthInput.tsx        # Birth date/time/gender form
-│   │   ├── BaziChart.tsx         # Four pillars display
-│   │   ├── ElementChart.tsx      # Five elements bar chart
-│   │   ├── DayunTimeline.tsx     # 10-year luck cycles
-│   │   ├── LiunianList.tsx       # Yearly fortune list
-│   │   └── PromptViewer.tsx      # Prompt display with copy buttons
+│   │   ├── ui/                     # shadcn primitives (button, card, input, label, select)
+│   │   ├── BirthInput.tsx          # react-hook-form + zod form
+│   │   ├── BaziChart.tsx           # four pillars panel
+│   │   ├── ElementChart.tsx        # five-element distribution
+│   │   ├── DayunTimeline.tsx       # 10-cycle grid (age range + calendar years)
+│   │   ├── LiunianList.tsx         # 7-year strip (prev/current/next 5)
+│   │   ├── ElementLegend.tsx       # 五行 color legend
+│   │   └── PromptViewer.tsx        # collapsible system/user prompt + copy buttons
 │   └── lib/
 │       ├── bazi/
-│       │   ├── types.ts          # TypeScript interfaces
-│       │   ├── ganzhi.ts         # Core constants (stems, branches)
-│       │   ├── data.ts           # NaYin, relationships
-│       │   ├── tenDeities.ts     # Ten deities mapping
-│       │   ├── elements.ts       # Element scoring
-│       │   ├── strength.ts       # Day master strength
-│       │   ├── calculator.ts     # Main calculation engine
-│       │   └── index.ts          # Module exports
-│       └── prompts/
-│           ├── builder.ts        # Prompt construction
-│           └── index.ts          # Module exports
-├── .github/
-│   └── workflows/
-│       └── deploy.yml            # GitHub Pages deployment
-├── next.config.ts                # Static export configuration
+│       │   ├── types.ts            # DaYunCycle carries startYear/endYear
+│       │   ├── ganzhi.ts           # stems, branches (do not modify)
+│       │   ├── data.ts             # NaYin, relationships (do not modify)
+│       │   ├── tenDeities.ts       # ten deities (do not modify)
+│       │   ├── elements.ts         # five-element scoring + color helpers
+│       │   ├── strength.ts         # day master 强/弱
+│       │   ├── calculator.ts       # main calculation engine
+│       │   └── index.ts            # barrel
+│       ├── prompts/
+│       │   ├── builder.ts          # buildInitialPrompt / buildLuckScalePrompt (locale-aware)
+│       │   └── index.ts
+│       ├── i18n/
+│       │   ├── strings.ts          # ~50 UI keys × { zh, en }
+│       │   └── context.tsx         # LocaleProvider + useLocale (localStorage-backed)
+│       └── utils.ts                # cn() helper
+├── tests/
+│   └── calculator.test.ts          # vitest round-trip
+├── vitest.config.ts
+├── components.json                 # shadcn config
+├── .github/workflows/deploy.yml    # GitHub Pages deployment
+├── next.config.ts
 └── package.json
 ```
 
 ## How It Works
 
-1. **Input**: User enters birth date, time (optional), and gender
-2. **Calculate**: BaZi calculation runs entirely in the browser
-3. **Display**: Results show four pillars, elements, DaYun, LiuNian
-4. **Generate Prompts**: Copy system/user prompts for LLM analysis
-5. **Use with LLM**: Paste prompts into ChatGPT, Claude, or any AI
+1. **Input** — user enters birth date, time (optional), gender.
+2. **Calculate** — BaZi runs entirely in the browser.
+3. **Display** — four pillars, element distribution, dayun (with calendar years), 7-year liunian, branch relationships.
+4. **Prompts** — system + user prompts generated in the active locale (中 or EN), embedded BaZi characters always Chinese.
+5. **Hand off** — copy the prompt into ChatGPT, Claude, Gemini, or any other LLM.
+
+## i18n
+
+- Default language: 中 (Traditional Chinese). Toggle via the `中 | EN` segmented control top-right.
+- BaZi-specific characters (天干 / 地支 / 納音 / 十神 / 五行 / ganzhi) stay in Chinese in both languages — only chrome translates.
+- Locale persists via `localStorage["destinyai.locale"]`.
+- Prompt templates (`src/lib/prompts/builder.ts`) have full ZH and EN versions; data tables embed Chinese symbols verbatim.
 
 ## GitHub Pages Deployment
 
-### Option 1: Automatic (GitHub Actions)
+### Automatic (GitHub Actions)
 
-1. Push to GitHub repository
-2. Go to **Settings > Pages**
-3. Set **Source** to "GitHub Actions"
-4. Push to `main` branch - deployment runs automatically
-5. Access at `https://<username>.github.io/fortune_app_js`
+1. Push to GitHub.
+2. Settings → Pages → Source = "GitHub Actions".
+3. Pushes to `main` auto-deploy.
+4. Access at `https://<username>.github.io/fortune_app_js`.
 
-### Option 2: Manual
+### Manual
 
 ```bash
 npm run build
-# Upload contents of ./out to any static hosting
+# Upload contents of ./out to any static host
 ```
-
-## Configuration
 
 ### Base Path
 
-If deploying to a subdirectory (e.g., GitHub Pages), the base path is configured in `next.config.ts`:
+Configured in `next.config.ts`:
 
-```typescript
+```ts
 basePath: process.env.NODE_ENV === "production" ? "/fortune_app_js" : "",
 ```
 
 Change `/fortune_app_js` to match your repository name.
 
-## Technology Stack
-
-- **Framework**: Next.js 14+ with App Router
-- **Language**: TypeScript (strict mode)
-- **Styling**: Tailwind CSS
-- **Calendar**: lunar-typescript
-- **Charts**: Recharts
-- **Build**: Static export for GitHub Pages
-
 ## Key Dependencies
 
 | Package | Purpose |
 |---------|---------|
-| lunar-typescript | Chinese calendar (Solar/Lunar) conversion |
-| recharts | Element distribution chart |
-| tailwindcss | Styling |
+| next, react, react-dom | App framework |
+| typescript | Strict types |
+| tailwindcss + tw-animate-css | Styling |
+| @radix-ui/react-{label,select,slot} | shadcn primitives' underlying Radix layer |
+| class-variance-authority, clsx, tailwind-merge | shadcn className tooling |
+| lucide-react | Icons |
+| react-hook-form + zod + @hookform/resolvers | Form validation |
+| recharts | Chart lib (reserved for future luck-scale viz) |
+| lunar-typescript | Solar ↔ Lunar conversion + ganzhi extraction |
+| vitest, @vitest/coverage-v8 | Tests (dev) |
 
 ## API Reference
 
@@ -134,11 +134,9 @@ import { calculateBaZi } from "@/lib/bazi";
 
 const result = calculateBaZi(
   "1990-01-15",  // birthday (YYYY-MM-DD)
-  "12:00",       // birthTime (HH:MM, optional)
-  "男"           // gender ("男" or "女")
+  "12:00",       // birthTime (HH:MM, optional, defaults to 12:00)
+  "男"           // gender ("男" | "女")
 );
-
-// Returns: BaZiResult with pillars, elements, dayun, etc.
 ```
 
 ### buildInitialPrompt
@@ -150,33 +148,26 @@ const { systemPrompt, userPrompt } = buildInitialPrompt(
   baziResult,
   gender,
   birthday,
-  includeClassicalTexts
+  /* includeClassical */ false,
+  /* locale */ "en"          // or "zh"
 );
-
-// Copy prompts to ChatGPT/Claude for interpretation
 ```
 
-## Development Notes
+Copy `systemPrompt` + `userPrompt` to your LLM of choice.
 
-### Adding New Features
-
-1. BaZi calculations go in `src/lib/bazi/`
-2. UI components go in `src/components/`
-3. Prompt templates go in `src/lib/prompts/`
-
-### Testing Locally
+## Testing
 
 ```bash
-npm run dev     # Development with hot reload
-npm run build   # Verify production build
-npm run lint    # Run ESLint
+npm test           # vitest run
+npm run lint       # eslint .
+npm run build      # static-export build (also type-checks)
 ```
 
 ## Credits
 
 - Calendar calculations: [lunar-typescript](https://github.com/6tail/lunar-typescript)
-- Based on traditional BaZi (八字) Chinese metaphysics
-- Ported from Python backend version
+- UI primitives: [shadcn/ui](https://ui.shadcn.com/)
+- Based on traditional BaZi (八字) Chinese metaphysics; ported from the Python `fortune_app` backend.
 
 ## License
 

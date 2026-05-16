@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { LocaleProvider } from "@/lib/i18n/context";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -13,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "DestinyAI 八字排盤",
-  description: "專業八字命理分析工具 · 純前端計算",
+  title: "DestinyAI · BaZi Reader",
+  description: "Client-side BaZi (八字) calculator and LLM prompt generator",
 };
 
 export default function RootLayout({
@@ -23,11 +24,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+    <html lang="zh-Hant">
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <LocaleProvider>{children}</LocaleProvider>
       </body>
     </html>
   );

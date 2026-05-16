@@ -81,6 +81,8 @@ export interface ElementScores {
 export interface DaYunCycle {
   cycle: number;
   ageRange: string;
+  startYear: number;
+  endYear: number;
   pillar: string;
   gan: Gan;
   zhi: Zhi;

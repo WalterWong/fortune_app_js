@@ -1,6 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import { ChevronDown } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { useLocale } from "@/lib/i18n/context";
 
 interface PromptViewerProps {
   systemPrompt: string;
@@ -8,7 +12,12 @@ interface PromptViewerProps {
   title?: string;
 }
 
-export default function PromptViewer({ systemPrompt, userPrompt, title = "命理分析提示詞" }: PromptViewerProps) {
+export default function PromptViewer({
+  systemPrompt,
+  userPrompt,
+  title,
+}: PromptViewerProps) {
+  const { t } = useLocale();
   const [expanded, setExpanded] = useState(false);
   const [copied, setCopied] = useState<"system" | "user" | "all" | null>(null);
 
@@ -25,74 +34,66 @@ export default function PromptViewer({ systemPrompt, userPrompt, title = "命理
   const combinedPrompt = `[System Prompt]\n${systemPrompt}\n\n[User Prompt]\n${userPrompt}`;
 
   return (
-    <div className="bg-white rounded-lg shadow-md border border-gray-200">
+    <Card className="py-0">
       <button
         onClick={() => setExpanded(!expanded)}
-        className="w-full px-6 py-4 flex items-center justify-between text-left hover:bg-gray-100 transition-colors"
+        className="w-full px-6 py-4 flex items-center justify-between text-left hover:bg-accent/50 transition-colors rounded-t-xl"
       >
-        <h2 className="text-lg font-bold text-gray-900">{title}</h2>
-        <svg
-          className={`w-5 h-5 text-gray-700 transform transition-transform ${expanded ? "rotate-180" : ""}`}
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-        </svg>
+        <h2 className="text-lg font-semibold">{title ?? t("initial_prompt_title")}</h2>
+        <ChevronDown
+          className={`size-5 text-muted-foreground transform transition-transform ${
+            expanded ? "rotate-180" : ""
+          }`}
+        />
       </button>
 
       {expanded && (
-        <div className="px-6 pb-6 space-y-4">
-          {/* Copy Buttons */}
+        <CardContent className="pb-6 space-y-4">
           <div className="flex flex-wrap gap-2">
-            <button
+            <Button
+              variant="secondary"
+              size="sm"
               onClick={() => copyToClipboard(systemPrompt, "system")}
-              className="px-4 py-2 bg-blue-200 text-blue-900 rounded-lg text-sm font-medium hover:bg-blue-300 transition-colors"
             >
-              {copied === "system" ? "已複製!" : "複製 System Prompt"}
-            </button>
-            <button
+              {copied === "system" ? t("copied") : t("copy_system")}
+            </Button>
+            <Button
+              variant="secondary"
+              size="sm"
               onClick={() => copyToClipboard(userPrompt, "user")}
-              className="px-4 py-2 bg-green-200 text-green-900 rounded-lg text-sm font-medium hover:bg-green-300 transition-colors"
             >
-              {copied === "user" ? "已複製!" : "複製 User Prompt"}
-            </button>
-            <button
-              onClick={() => copyToClipboard(combinedPrompt, "all")}
-              className="px-4 py-2 bg-purple-200 text-purple-900 rounded-lg text-sm font-medium hover:bg-purple-300 transition-colors"
-            >
-              {copied === "all" ? "已複製!" : "複製全部"}
-            </button>
+              {copied === "user" ? t("copied") : t("copy_user")}
+            </Button>
+            <Button size="sm" onClick={() => copyToClipboard(combinedPrompt, "all")}>
+              {copied === "all" ? t("copied") : t("copy_all")}
+            </Button>
           </div>
 
-          {/* Instructions */}
           <div className="p-4 bg-amber-100 rounded-lg text-sm text-amber-900 border border-amber-200">
-            <p className="font-semibold mb-1">使用說明:</p>
+            <p className="font-semibold mb-1">{t("usage_title")}</p>
             <ol className="list-decimal list-inside space-y-1">
-              <li>複製上方的提示詞</li>
-              <li>打開 ChatGPT、Claude 或其他 LLM 界面</li>
-              <li>將 System Prompt 設為系統指令 (若支持)</li>
-              <li>將 User Prompt 貼入對話框發送</li>
+              <li>{t("usage_step_1")}</li>
+              <li>{t("usage_step_2")}</li>
+              <li>{t("usage_step_3")}</li>
+              <li>{t("usage_step_4")}</li>
             </ol>
           </div>
 
-          {/* System Prompt */}
           <div>
-            <h3 className="text-sm font-semibold text-gray-900 mb-2">System Prompt</h3>
-            <pre className="p-4 bg-gray-100 rounded-lg text-sm text-gray-900 overflow-x-auto whitespace-pre-wrap max-h-48 overflow-y-auto border border-gray-200">
+            <h3 className="text-sm font-semibold mb-2">System Prompt</h3>
+            <pre className="p-4 bg-muted rounded-lg text-sm overflow-x-auto whitespace-pre-wrap max-h-48 overflow-y-auto border">
               {systemPrompt}
             </pre>
           </div>
 
-          {/* User Prompt */}
           <div>
-            <h3 className="text-sm font-semibold text-gray-900 mb-2">User Prompt</h3>
-            <pre className="p-4 bg-gray-100 rounded-lg text-sm text-gray-900 overflow-x-auto whitespace-pre-wrap max-h-96 overflow-y-auto border border-gray-200">
+            <h3 className="text-sm font-semibold mb-2">User Prompt</h3>
+            <pre className="p-4 bg-muted rounded-lg text-sm overflow-x-auto whitespace-pre-wrap max-h-96 overflow-y-auto border">
               {userPrompt}
             </pre>
           </div>
-        </div>
+        </CardContent>
       )}
-    </div>
+    </Card>
   );
 }

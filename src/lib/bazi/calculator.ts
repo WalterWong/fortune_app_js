@@ -86,9 +86,9 @@ export function calculateBaZi(
   // Calculate DaYun (10-year cycles)
   const dayun = calculateDayun(eightChar, gender, year);
 
-  // Calculate LiuNian (yearly fortune)
+  // Calculate LiuNian: previous 1 year + current + next 5 = 7 years total
   const currentYear = new Date().getFullYear();
-  const liunian = calculateLiunian(currentYear, 11);
+  const liunian = calculateLiunian(currentYear - 1, 7);
 
   // Get zodiac
   const zodiac = ZODIAC[pillars.year.zhi];
@@ -200,6 +200,8 @@ function calculateDayun(
     cycles.push({
       cycle: i + 1,
       ageRange: `${startAge}-${endAge}`,
+      startYear: birthYear + startAge,
+      endYear: birthYear + endAge,
       pillar: dy.getGanZhi(),
       gan,
       zhi,
