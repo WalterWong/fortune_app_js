@@ -31,10 +31,6 @@ export const STRINGS: Dict = {
     zh: "若不確定出生時間，將使用中午 12:00 進行計算",
     en: "If unknown, noon (12:00) will be used.",
   },
-  hint_birth_time_format: {
-    zh: "輸入24小時制自動轉換 (如: 00→12AM, 13→1PM)",
-    en: "Enter in 24-hour format — auto-displays as AM/PM (e.g. 00→12AM, 13→1PM)",
-  },
   label_gender: { zh: "性別", en: "Gender" },
   gender_male: { zh: "男", en: "Male (男)" },
   gender_female: { zh: "女", en: "Female (女)" },
