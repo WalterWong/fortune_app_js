@@ -77,6 +77,7 @@ export default function BirthInput({ onCalculate, isLoading }: BirthInputProps) 
           {...register("birth_time")}
           className="h-12"
         />
+        <p className="text-xs text-gray-500">{t("hint_birth_time_format")}</p>
         <p className="text-xs text-gray-500">{t("hint_birth_time")}</p>
       </div>
 
