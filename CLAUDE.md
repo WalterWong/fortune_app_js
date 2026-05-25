@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-> Follows the conventions at `../../_privco/_doc/doc_structure_guideline.md`.
+> Follows the conventions at `../../../_privco/_doc/doc_structure_guideline.md`.
 
 **Standalone** client-side BaZi (八字) calculator in Next.js + TypeScript. **No backend required** — all calculations run in the browser. Uses `lunar-typescript` for Solar→Lunar conversion. Outputs a formatted prompt the user copies into ChatGPT, Claude, Gemini, or any other LLM for interpretation.
 
