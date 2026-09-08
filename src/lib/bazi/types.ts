@@ -12,7 +12,7 @@ export type Gan = "甲" | "乙" | "丙" | "丁" | "戊" | "己" | "庚" | "辛" 
 export type Zhi = "子" | "丑" | "寅" | "卯" | "辰" | "巳" | "午" | "未" | "申" | "酉" | "戌" | "亥";
 
 // Ten Deities
-export type TenDeity = "比" | "劫" | "食" | "傷" | "才" | "財" | "杀" | "官" | "枭" | "印";
+export type TenDeity = "比" | "劫" | "食" | "傷" | "才" | "財" | "杀" | "官" | "梟" | "印";
 
 // Positional Status (12 stages of life)
 export type PositionalStatus = "長" | "沐" | "冠" | "建" | "帝" | "衰" | "病" | "死" | "墓" | "絕" | "胎" | "養";
@@ -48,7 +48,7 @@ export interface FourPillars {
 // Branch Relationships
 export interface Relationships {
   he: string[];      // 合 (Combinations)
-  chong: string[];   // 冲 (Clashes)
+  chong: string[];   // 沖 (Clashes)
   xing: string[];    // 刑 (Punishments)
   hai: string[];     // 害 (Harms)
   po: string[];      // 破 (Breaks)
@@ -100,7 +100,7 @@ export interface LiuNian {
 // Day Master Strength Assessment
 export interface StrengthAssessment {
   isWeak: boolean;
-  assessment: "强" | "弱";
+  assessment: "強" | "弱";
   supportCount: number;
   supportScore: number;
 }

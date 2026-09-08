@@ -62,8 +62,8 @@ export function calculateElementScores(pillars: FourPillars): ElementScores {
 
 /**
  * Get favorable elements based on day master strength
- * - If weak: need elements that support (生我, 同类)
- * - If strong: need elements that drain (我生, 我克)
+ * - If weak: need elements that support (生我, 同類)
+ * - If strong: need elements that drain (我生, 我剋)
  */
 export function getFavorableElements(
   dayMasterElement: Element,
@@ -82,7 +82,7 @@ export function getFavorableElements(
   if (isWeak) {
     // Weak day master needs support
     return {
-      favorable: [dayMasterElement, rel.generatedBy as Element], // 同类 + 生我
+      favorable: [dayMasterElement, rel.generatedBy as Element], // 同類 + 生我
       unfavorable: [rel.generates as Element, rel.overcomes as Element, rel.overcomeBy as Element],
     };
   } else {

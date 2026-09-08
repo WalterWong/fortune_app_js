@@ -105,7 +105,7 @@ function buildInitialPromptZh(
   ) {
     userPrompt += `地支關係:\n`;
     if (relationships.he.length) userPrompt += `合: ${relationships.he.join(", ")}\n`;
-    if (relationships.chong.length) userPrompt += `冲: ${relationships.chong.join(", ")}\n`;
+    if (relationships.chong.length) userPrompt += `沖: ${relationships.chong.join(", ")}\n`;
     if (relationships.xing.length) userPrompt += `刑: ${relationships.xing.join(", ")}\n`;
     if (relationships.hai.length) userPrompt += `害: ${relationships.hai.join(", ")}\n`;
     if (relationships.po.length) userPrompt += `破: ${relationships.po.join(", ")}\n`;
@@ -227,7 +227,7 @@ Lunar date: ${baziData.birthInfo.lunarDate}
   userPrompt += enPillar("Day (日)", pillars.day, true);
   userPrompt += enPillar("Hour (時)", pillars.hour);
 
-  const strengthEn = baziData.strength.assessment === "强" ? "Strong (强)" : "Weak (弱)";
+  const strengthEn = baziData.strength.assessment === "強" ? "Strong (強)" : "Weak (弱)";
   userPrompt += `Day Master: ${baziData.dayMaster} (${baziData.dayMasterElement})
 Day Master strength: ${strengthEn}
 
@@ -398,7 +398,7 @@ Luck Scale 的評估請同時考量以下三個層面，並說明其影響方向
 👉 此為「底盤分數」，影響整體波動幅度。
 
 2️⃣ 當前大運（十年運）
-• 大運五行是否扶助或克制日元
+• 大運五行是否扶助或剋制日元
 • 是否引動原局關鍵十神（如財、官、印、食傷）
 • 大運屬於發展期、消耗期或修正期
 👉 此為「長期趨勢分數」，決定一段人生高低走向。
@@ -531,7 +531,7 @@ Use English prose. Keep Chinese symbols (天干/地支/五行/十神) intact —
     }
   }
 
-  const strengthEn = baziData.strength.assessment === "强" ? "Strong (强)" : "Weak (弱)";
+  const strengthEn = baziData.strength.assessment === "強" ? "Strong (強)" : "Weak (弱)";
 
   let userPrompt = `Current year: ${currentYear} CE (${currentYearGanzhi} 年).
 

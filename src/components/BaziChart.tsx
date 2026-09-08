@@ -27,8 +27,8 @@ export default function BaziChart({ pillars, tenDeities, dayMaster, strength }: 
           <span
             className="ml-2 px-2 py-1 rounded text-xs font-semibold"
             style={{
-              backgroundColor: strength === "强" ? "#86EFAC" : "#FCA5A5",
-              color: strength === "强" ? "#14532D" : "#7F1D1D",
+              backgroundColor: strength === "強" ? "#86EFAC" : "#FCA5A5",
+              color: strength === "強" ? "#14532D" : "#7F1D1D",
             }}
           >
             {strength}

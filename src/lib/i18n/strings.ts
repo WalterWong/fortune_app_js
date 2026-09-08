@@ -6,7 +6,7 @@ type Dict = Record<string, { zh: string; en: string }>;
 
 export const STRINGS: Dict = {
   // Header
-  app_title: { zh: "DestinyAI 八字排盤", en: "DestinyAI · BaZi Reader" },
+  app_title: { zh: "八字排盤", en: "BaZi Chart & Prompt" },
   subtitle_pure_client: { zh: "純前端計算 · 無需後端", en: "Client-side only · No backend" },
   toggle_to_en: { zh: "EN", en: "EN" },
   toggle_to_zh: { zh: "中", en: "中" },

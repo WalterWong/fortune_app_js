@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "DestinyAI · BaZi Reader",
+  title: "八字排盤 · BaZi Chart & Prompt",
   description: "Client-side BaZi (八字) calculator and LLM prompt generator",
 };
 

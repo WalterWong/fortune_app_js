@@ -63,7 +63,7 @@ export function calculateStrength(pillars: FourPillars): StrengthAssessment {
 
   return {
     isWeak,
-    assessment: isWeak ? "弱" : "强",
+    assessment: isWeak ? "弱" : "強",
     supportCount,
     supportScore,
   };
@@ -93,12 +93,12 @@ export function getStrengthAnalysis(
   const lines: string[] = [];
 
   lines.push(`日主 ${dayMaster}${dayMasterElement}，`);
-  lines.push(`月令 ${pillars.month.zhi} 处 ${monthStatus} 位。`);
+  lines.push(`月令 ${pillars.month.zhi} 處 ${monthStatus} 位。`);
 
   if (strength.isWeak) {
     lines.push(`日主偏弱，需生扶（印星、比劫）。`);
   } else {
-    lines.push(`日主偏强，需泄耗（食傷、財星、官杀）。`);
+    lines.push(`日主偏強，需泄耗（食傷、財星、官杀）。`);
   }
 
   lines.push(`支持度：${strength.supportScore.toFixed(1)} 分`);
@@ -113,7 +113,7 @@ export function countDeities(pillars: FourPillars): Record<TenDeity, number> {
   const dayMaster = pillars.day.gan;
   const counts: Record<TenDeity, number> = {
     比: 0, 劫: 0, 食: 0, 傷: 0, 才: 0,
-    財: 0, 杀: 0, 官: 0, 枭: 0, 印: 0,
+    財: 0, 杀: 0, 官: 0, 梟: 0, 印: 0,
   };
 
   // Count stem deities

@@ -10,7 +10,7 @@ export const GAN: Gan[] = ["甲", "乙", "丙", "丁", "戊", "己", "庚", "辛
 // 十二地支 (12 Earthly Branches)
 export const ZHI: Zhi[] = ["子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥"];
 
-// 天干对应五行
+// 天干對應五行
 export const GAN_ELEMENT: Record<Gan, Element> = {
   甲: "木", 乙: "木",
   丙: "火", 丁: "火",
@@ -19,7 +19,7 @@ export const GAN_ELEMENT: Record<Gan, Element> = {
   壬: "水", 癸: "水",
 };
 
-// 地支对应五行
+// 地支對應五行
 export const ZHI_ELEMENT: Record<Zhi, Element> = {
   子: "水", 丑: "土", 寅: "木", 卯: "木",
   辰: "土", 巳: "火", 午: "火", 未: "土",
@@ -49,17 +49,17 @@ export const ZODIAC: Record<Zhi, string> = {
   申: "猴", 酉: "雞", 戌: "狗", 亥: "豬",
 };
 
-// 五行相生相克
+// 五行相生相剋
 export const ELEMENT_RELATIONS = {
   // 相生 (generating)
   generates: {
     金: "水", 水: "木", 木: "火", 火: "土", 土: "金",
   } as Record<Element, Element>,
-  // 相克 (overcoming)
+  // 相剋 (overcoming)
   overcomes: {
     金: "木", 木: "土", 土: "水", 水: "火", 火: "金",
   } as Record<Element, Element>,
-  // 被克 (overcome by)
+  // 被剋 (overcome by)
   overcomeBy: {
     金: "火", 木: "金", 土: "木", 水: "土", 火: "水",
   } as Record<Element, Element>,
@@ -69,7 +69,7 @@ export const ELEMENT_RELATIONS = {
   } as Record<Element, Element>,
 };
 
-// 時辰对应時間
+// 時辰對應時間
 export const ZHI_TIME: Record<Zhi, string> = {
   子: "23:00-01:00", 丑: "01:00-03:00", 寅: "03:00-05:00", 卯: "05:00-07:00",
   辰: "07:00-09:00", 巳: "09:00-11:00", 午: "11:00-13:00", 未: "13:00-15:00",

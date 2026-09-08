@@ -111,10 +111,16 @@ awaiting written confirmation, Q37–Q44 not yet pasted). Porting a moving targe
 engines that drift apart silently, since this one has no expert reviewer. Wait until the pack is
 walked, then port once against a frozen ruleset.
 
+**Script rule — read before any zh-Hant sweep.** The authority is her canon in `../../bazi/`,
+NOT a conversion library. A blanket converter destroys the domain: `丑`(地支)→醜 "ugly",
+`干`(天干)→幹, `斗`(斗數)→鬥, `凶`→兇, and `冲`→衝 where the canon wants `沖`. **Never convert:
+丑 干 斗 凶, and the standalone mark 杀.** `tests/labels.test.ts` enforces this in both directions.
+
 **Known divergences from canon (deliberate, not bugs):**
-- `偏印` prints as `枭` here; the backend prints `P` (her 簡記). Hers is personal shorthand — `枭`
-  is the better label for a general tool. Revisit only if this app becomes hers.
-- `七殺` prints as `杀` in BOTH — that is Simplified **on purpose**, because it is what she
-  writes. Do not "correct" it to `殺`; that would diverge from her, not toward her.
+- `七殺` — the **short chart mark** is `杀` (Simplified, on purpose: her canon has 杀 525 : 殺 166),
+  but the **full name** is `七殺` (canon 七殺 56 : 七杀 2). Her own guide states the pairing
+  literally: 「七殺 → 杀」. Do not blanket-convert either way; `tests/labels.test.ts` pins both.
+- `偏印` prints as `梟` (Traditional). The `杀` exception does NOT extend here — the backend canon
+  contains no `枭`/`梟` at all (it writes `P`), and `../../bazi/` has 梟 12 : 枭 0.
 - Hidden-stem weights use this app's own 5/3/1-ish scale, not the engine's 20/10 司令 weights.
   Both are proportional systems; hers has not ruled on ours. Leave until it does.

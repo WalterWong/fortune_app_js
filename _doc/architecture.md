@@ -1,4 +1,4 @@
-# bazi-calculator-standalone — Architecture Reference
+# bazi-standalone — Architecture Reference
 
 > Renamed from `fortune_app_js` on 2026-09-08. Active but **behind** the Python engine —
 > see `../CLAUDE.md` § Catching up for the assessed gap and why the port is deliberately parked.
@@ -66,7 +66,7 @@ Prompt generation (zh | en) → User copies to LLM
 | `src/lib/i18n/strings.ts` | Flat `STRINGS` dict keyed by id × `{zh, en}`. ~50 keys covering header / form / panels / prompt viewer / footer. |
 | `src/lib/i18n/context.tsx` | `LocaleProvider` + `useLocale()` hook. Persists to `localStorage["destinyai.locale"]`; hydrates after mount (SSR-safe). |
 | `src/lib/utils.ts` | `cn()` helper for shadcn className composition. |
-| `src/components/ui/` | shadcn primitives: `button.tsx`, `card.tsx`, `input.tsx`, `label.tsx`, `select.tsx`. Byte-equivalent with `../destinyai-frontend/components/ui/`. |
+| `src/components/ui/` | shadcn primitives: `button.tsx`, `card.tsx`, `input.tsx`, `label.tsx`, `select.tsx`. Originally byte-equivalent with `../destinyai-frontend/components/ui/`; that two-way obligation is **retired (2026-09-08)** — the two apps may diverge, and this one lifts from the frontend on demand rather than tracking it. |
 | `src/components/BirthInput.tsx` | Form using react-hook-form + zod; uses shadcn Input / Label / Select / Button. |
 | `src/components/BaziChart.tsx` | Four pillars panel; uses element bg/text colors. |
 | `src/components/ElementChart.tsx` | Five-element bar chart with favorable/unfavorable callouts. |

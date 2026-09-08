@@ -8,16 +8,16 @@ import { GAN_ELEMENT, HIDDEN_STEMS } from "./ganzhi";
 // Ten Deities mapping for each day master
 // Key: day master, Value: mapping of other stems to ten deities
 const TEN_DEITIES_MAP: Record<Gan, Record<Gan, TenDeity>> = {
-  甲: { 甲: "比", 乙: "劫", 丙: "食", 丁: "傷", 戊: "才", 己: "財", 庚: "杀", 辛: "官", 壬: "枭", 癸: "印" },
-  乙: { 甲: "劫", 乙: "比", 丙: "傷", 丁: "食", 戊: "財", 己: "才", 庚: "官", 辛: "杀", 壬: "印", 癸: "枭" },
-  丙: { 丙: "比", 丁: "劫", 戊: "食", 己: "傷", 庚: "才", 辛: "財", 壬: "杀", 癸: "官", 甲: "枭", 乙: "印" },
-  丁: { 丙: "劫", 丁: "比", 戊: "傷", 己: "食", 庚: "財", 辛: "才", 壬: "官", 癸: "杀", 甲: "印", 乙: "枭" },
-  戊: { 戊: "比", 己: "劫", 庚: "食", 辛: "傷", 壬: "才", 癸: "財", 甲: "杀", 乙: "官", 丙: "枭", 丁: "印" },
-  己: { 戊: "劫", 己: "比", 庚: "傷", 辛: "食", 壬: "財", 癸: "才", 甲: "官", 乙: "杀", 丙: "印", 丁: "枭" },
-  庚: { 庚: "比", 辛: "劫", 壬: "食", 癸: "傷", 甲: "才", 乙: "財", 丙: "杀", 丁: "官", 戊: "枭", 己: "印" },
-  辛: { 庚: "劫", 辛: "比", 壬: "傷", 癸: "食", 甲: "財", 乙: "才", 丙: "官", 丁: "杀", 戊: "印", 己: "枭" },
-  壬: { 壬: "比", 癸: "劫", 甲: "食", 乙: "傷", 丙: "才", 丁: "財", 戊: "杀", 己: "官", 庚: "枭", 辛: "印" },
-  癸: { 壬: "劫", 癸: "比", 甲: "傷", 乙: "食", 丙: "財", 丁: "才", 戊: "官", 己: "杀", 庚: "印", 辛: "枭" },
+  甲: { 甲: "比", 乙: "劫", 丙: "食", 丁: "傷", 戊: "才", 己: "財", 庚: "杀", 辛: "官", 壬: "梟", 癸: "印" },
+  乙: { 甲: "劫", 乙: "比", 丙: "傷", 丁: "食", 戊: "財", 己: "才", 庚: "官", 辛: "杀", 壬: "印", 癸: "梟" },
+  丙: { 丙: "比", 丁: "劫", 戊: "食", 己: "傷", 庚: "才", 辛: "財", 壬: "杀", 癸: "官", 甲: "梟", 乙: "印" },
+  丁: { 丙: "劫", 丁: "比", 戊: "傷", 己: "食", 庚: "財", 辛: "才", 壬: "官", 癸: "杀", 甲: "印", 乙: "梟" },
+  戊: { 戊: "比", 己: "劫", 庚: "食", 辛: "傷", 壬: "才", 癸: "財", 甲: "杀", 乙: "官", 丙: "梟", 丁: "印" },
+  己: { 戊: "劫", 己: "比", 庚: "傷", 辛: "食", 壬: "財", 癸: "才", 甲: "官", 乙: "杀", 丙: "印", 丁: "梟" },
+  庚: { 庚: "比", 辛: "劫", 壬: "食", 癸: "傷", 甲: "才", 乙: "財", 丙: "杀", 丁: "官", 戊: "梟", 己: "印" },
+  辛: { 庚: "劫", 辛: "比", 壬: "傷", 癸: "食", 甲: "財", 乙: "才", 丙: "官", 丁: "杀", 戊: "印", 己: "梟" },
+  壬: { 壬: "比", 癸: "劫", 甲: "食", 乙: "傷", 丙: "才", 丁: "財", 戊: "杀", 己: "官", 庚: "梟", 辛: "印" },
+  癸: { 壬: "劫", 癸: "比", 甲: "傷", 乙: "食", 丙: "財", 丁: "才", 戊: "官", 己: "杀", 庚: "印", 辛: "梟" },
 };
 
 // Positional Status (十二長生) for each day master
@@ -82,10 +82,10 @@ export function getHiddenStemDeities(dayMaster: Gan, branch: Zhi): { stem: Gan; 
 }
 
 /**
- * Check if a ten deity supports the day master (比/劫/印/枭)
+ * Check if a ten deity supports the day master (比/劫/印/梟)
  */
 export function isSupportingDeity(deity: TenDeity): boolean {
-  return ["比", "劫", "印", "枭"].includes(deity);
+  return ["比", "劫", "印", "梟"].includes(deity);
 }
 
 /**
@@ -94,7 +94,7 @@ export function isSupportingDeity(deity: TenDeity): boolean {
  * - 食傷: Output/talent
  * - 財才: Wealth
  * - 官杀: Power/authority
- * - 印枭: Resource/support
+ * - 印梟: Resource/support
  */
 export function getDeityCategory(deity: TenDeity): string {
   switch (deity) {
@@ -111,21 +111,21 @@ export function getDeityCategory(deity: TenDeity): string {
     case "杀":
       return "官杀";
     case "印":
-    case "枭":
+    case "梟":
       return "印星";
   }
 }
 
 // Ten deity descriptions
 export const TEN_DEITY_DESC: Record<TenDeity, { name: string; meaning: string }> = {
-  比: { name: "比肩", meaning: "同类相助，兄弟姐妹，朋友同事" },
-  劫: { name: "劫財", meaning: "竞争对手，争夺財物，损財之象" },
-  食: { name: "食神", meaning: "才华表现，口福口才，性格温和" },
-  傷: { name: "傷官", meaning: "聪明叛逆，艺术才华，克制官星" },
-  才: { name: "偏財", meaning: "意外之財，投机收入，父亲之象" },
-  財: { name: "正財", meaning: "正当收入，稳定財源，妻子之象" },
-  杀: { name: "七杀", meaning: "权威压力，竞争对手，小人之象" },
-  官: { name: "正官", meaning: "正当权力，上司领导，丈夫之象" },
-  枭: { name: "偏印", meaning: "偏门学问，特殊技能，继母之象" },
-  印: { name: "正印", meaning: "学问知识，貴人相助，母亲之象" },
+  比: { name: "比肩", meaning: "同類相助，兄弟姐妹，朋友同事" },
+  劫: { name: "劫財", meaning: "競爭對手，爭奪財物，損財之象" },
+  食: { name: "食神", meaning: "才華表現，口福口才，性格溫和" },
+  傷: { name: "傷官", meaning: "聰明叛逆，藝術才華，剋制官星" },
+  才: { name: "偏財", meaning: "意外之財，投機收入，父親之象" },
+  財: { name: "正財", meaning: "正當收入，穩定財源，妻子之象" },
+  杀: { name: "七殺", meaning: "權威壓力，競爭對手，小人之象" },
+  官: { name: "正官", meaning: "正當權力，上司領導，丈夫之象" },
+  梟: { name: "偏印", meaning: "偏門學問，特殊技能，繼母之象" },
+  印: { name: "正印", meaning: "學問知識，貴人相助，母親之象" },
 };

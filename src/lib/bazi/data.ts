@@ -4,21 +4,21 @@
 
 import type { Gan, Zhi } from "./types";
 
-// 纳音 (NaYin) - 60 Jiazi cycle sounds
+// 納音 (NaYin) - 60 Jiazi cycle sounds
 export const NAYIN: Record<string, string> = {
   "甲子": "海中金", "乙丑": "海中金",
-  "丙寅": "炉中火", "丁卯": "炉中火",
+  "丙寅": "爐中火", "丁卯": "爐中火",
   "戊辰": "大林木", "己巳": "大林木",
   "庚午": "路旁土", "辛未": "路旁土",
   "壬申": "劍鋒金", "癸酉": "劍鋒金",
   "甲戌": "山頭火", "乙亥": "山頭火",
   "丙子": "澗下水", "丁丑": "澗下水",
   "戊寅": "城頭土", "己卯": "城頭土",
-  "庚辰": "白蜡金", "辛巳": "白蜡金",
+  "庚辰": "白蠟金", "辛巳": "白蠟金",
   "壬午": "楊柳木", "癸未": "楊柳木",
   "甲申": "井泉水", "乙酉": "井泉水",
   "丙戌": "屋上土", "丁亥": "屋上土",
-  "戊子": "霹雳火", "己丑": "霹雳火",
+  "戊子": "霹靂火", "己丑": "霹靂火",
   "庚寅": "松柏木", "辛卯": "松柏木",
   "壬辰": "長流水", "癸巳": "長流水",
   "甲午": "砂中金", "乙未": "砂中金",
@@ -26,9 +26,9 @@ export const NAYIN: Record<string, string> = {
   "戊戌": "平地木", "己亥": "平地木",
   "庚子": "壁上土", "辛丑": "壁上土",
   "壬寅": "金泊金", "癸卯": "金泊金",
-  "甲辰": "覆灯火", "乙巳": "覆灯火",
+  "甲辰": "覆燈火", "乙巳": "覆燈火",
   "丙午": "天河水", "丁未": "天河水",
-  "戊申": "大驿土", "己酉": "大驿土",
+  "戊申": "大驛土", "己酉": "大驛土",
   "庚戌": "釵釧金", "辛亥": "釵釧金",
   "壬子": "桑柘木", "癸丑": "桑柘木",
   "甲寅": "大溪水", "乙卯": "大溪水",
@@ -38,7 +38,7 @@ export const NAYIN: Record<string, string> = {
   "壬戌": "大海水", "癸亥": "大海水",
 };
 
-// 地支六冲 (Six Clashes)
+// 地支六沖 (Six Clashes)
 export const ZHI_CHONG: Record<Zhi, Zhi> = {
   子: "午", 午: "子",
   丑: "未", 未: "丑",
@@ -66,7 +66,7 @@ export const ZHI_SANHE: [Zhi, Zhi, Zhi, string][] = [
   ["亥", "卯", "未", "木"],
 ];
 
-// 地支三会 (Three Gatherings)
+// 地支三會 (Three Gatherings)
 export const ZHI_SANHUI: [Zhi, Zhi, Zhi, string][] = [
   ["亥", "子", "丑", "水"],
   ["寅", "卯", "辰", "木"],
@@ -76,9 +76,9 @@ export const ZHI_SANHUI: [Zhi, Zhi, Zhi, string][] = [
 
 // 地支相刑 (Punishments)
 export const ZHI_XING: Record<Zhi, Zhi | null> = {
-  寅: "巳", 巳: "申", 申: "寅",  // 无恩之刑
-  未: "丑", 丑: "戌", 戌: "未",  // 持势之刑
-  子: "卯", 卯: "子",            // 无礼之刑
+  寅: "巳", 巳: "申", 申: "寅",  // 無恩之刑
+  未: "丑", 丑: "戌", 戌: "未",  // 持勢之刑
+  子: "卯", 卯: "子",            // 無禮之刑
   辰: "辰", 午: "午", 酉: "酉", 亥: "亥",  // 自刑
 };
 
@@ -111,7 +111,7 @@ export const GAN_HE: [Gan, Gan, string][] = [
   ["戊", "癸", "火"],
 ];
 
-// 天干相冲 (Stem Clashes)
+// 天干相沖 (Stem Clashes)
 export const GAN_CHONG: [Gan, Gan][] = [
   ["甲", "庚"],
   ["乙", "辛"],
@@ -179,9 +179,9 @@ export function detectRelationships(branches: Zhi[]): {
         result.he.push(`${b1}${b2}合${heElement || ""}`);
       }
 
-      // 六冲 (Six Clashes)
+      // 六沖 (Six Clashes)
       if (attrs.chong === b2) {
-        result.chong.push(`${b1}${b2}冲`);
+        result.chong.push(`${b1}${b2}沖`);
       }
 
       // 相害 (Harms)
@@ -208,10 +208,10 @@ export function detectRelationships(branches: Zhi[]): {
     }
   }
 
-  // Check for three gatherings (三会)
+  // Check for three gatherings (三會)
   for (const [z1, z2, z3, element] of ZHI_SANHUI) {
     if (branches.includes(z1) && branches.includes(z2) && branches.includes(z3)) {
-      result.he.push(`${z1}${z2}${z3}三会${element}局`);
+      result.he.push(`${z1}${z2}${z3}三會${element}局`);
     }
   }
 
