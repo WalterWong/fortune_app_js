@@ -1,5 +1,8 @@
 # 2026-05-16 — shadcn migration, calendar years on 大運, 7-year 流年, 中/EN toggle, EN prompts
 
+> ⚠ Renamed 2026-09-08: the repo this doc calls `fortune_app_js` is now `bazi-standalone`
+> (folder, GitHub repo, and Pages basePath). Names below are kept as written at the time.
+
 Session log for the refactor that brought `fortune_app_js` in line with `../destinyai-frontend` and added a full English mode.
 
 ## What changed

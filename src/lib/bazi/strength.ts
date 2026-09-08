@@ -7,9 +7,9 @@ import { GAN_ELEMENT, HIDDEN_STEMS } from "./ganzhi";
 import { getTenDeity, getPositionalStatus, isSupportingDeity, getHiddenStemDeities } from "./tenDeities";
 
 // Positional statuses that indicate strength
-const STRONG_POSITIONS = ["建", "帝", "冠", "长"];
-const MODERATE_POSITIONS = ["沐", "养", "胎"];
-const WEAK_POSITIONS = ["衰", "病", "死", "墓", "绝"];
+const STRONG_POSITIONS = ["建", "帝", "冠", "長"];
+const MODERATE_POSITIONS = ["沐", "養", "胎"];
+const WEAK_POSITIONS = ["衰", "病", "死", "墓", "絕"];
 
 /**
  * Calculate day master strength
@@ -98,7 +98,7 @@ export function getStrengthAnalysis(
   if (strength.isWeak) {
     lines.push(`日主偏弱，需生扶（印星、比劫）。`);
   } else {
-    lines.push(`日主偏强，需泄耗（食伤、财星、官杀）。`);
+    lines.push(`日主偏强，需泄耗（食傷、財星、官杀）。`);
   }
 
   lines.push(`支持度：${strength.supportScore.toFixed(1)} 分`);
@@ -112,8 +112,8 @@ export function getStrengthAnalysis(
 export function countDeities(pillars: FourPillars): Record<TenDeity, number> {
   const dayMaster = pillars.day.gan;
   const counts: Record<TenDeity, number> = {
-    比: 0, 劫: 0, 食: 0, 伤: 0, 才: 0,
-    财: 0, 杀: 0, 官: 0, 枭: 0, 印: 0,
+    比: 0, 劫: 0, 食: 0, 傷: 0, 才: 0,
+    財: 0, 杀: 0, 官: 0, 枭: 0, 印: 0,
   };
 
   // Count stem deities

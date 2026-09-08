@@ -12,10 +12,10 @@ export type Gan = "甲" | "乙" | "丙" | "丁" | "戊" | "己" | "庚" | "辛" 
 export type Zhi = "子" | "丑" | "寅" | "卯" | "辰" | "巳" | "午" | "未" | "申" | "酉" | "戌" | "亥";
 
 // Ten Deities
-export type TenDeity = "比" | "劫" | "食" | "伤" | "才" | "财" | "杀" | "官" | "枭" | "印";
+export type TenDeity = "比" | "劫" | "食" | "傷" | "才" | "財" | "杀" | "官" | "枭" | "印";
 
 // Positional Status (12 stages of life)
-export type PositionalStatus = "长" | "沐" | "冠" | "建" | "帝" | "衰" | "病" | "死" | "墓" | "绝" | "胎" | "养";
+export type PositionalStatus = "長" | "沐" | "冠" | "建" | "帝" | "衰" | "病" | "死" | "墓" | "絕" | "胎" | "養";
 
 // Gender
 export type Gender = "男" | "女";

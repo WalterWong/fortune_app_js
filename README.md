@@ -1,10 +1,12 @@
 # DestinyAI TypeScript — BaZi Fortune Calculator
 
-> **RETIRED 2026-09-07.** No longer developed. The local folder is now
-> `destinyai/_retired/bazi-calculator-standalone/`, but the **GitHub repo keeps the name
-> `fortune_app_js`** on purpose — the GitHub Pages URL and the `basePath` below depend on it,
-> so every `/fortune_app_js` in this file is correct and must not be "fixed".
-> The Pages deploy is still live; the repo is archived read-only and CI no longer runs.
+> **`bazi-standalone`** — the **no-backend** BaZi app. Computes the chart in the browser,
+> renders the template and annotation labels, and **prepares a prompt** you paste into
+> ChatGPT / Claude / Gemini yourself. It is *not* a JS port of `destinyai-backend` and *not* a
+> cut-down `destinyai-frontend` — those two are one paired product; this is independent and
+> shares only the BaZi domain. Renamed from `fortune_app_js` on 2026-09-08, because that name
+> implied otherwise. **Status: behind, not broken** — see `CLAUDE.md` § Catching up.
+
 
 A pure client-side TypeScript implementation of BaZi (八字) fortune-telling calculations. All calculations run in the browser — no backend required. Deployable to GitHub Pages. Bilingual UI (中/EN) with an in-built LLM prompt builder that targets ChatGPT, Claude, Gemini, or any other LLM.
 
@@ -34,7 +36,7 @@ npx serve out      # preview the static build
 ## Project Structure
 
 ```
-fortune_app_js/
+bazi-standalone/
 ├── src/
 │   ├── app/
 │   │   ├── layout.tsx              # wraps tree in LocaleProvider
@@ -97,7 +99,7 @@ fortune_app_js/
 1. Push to GitHub.
 2. Settings → Pages → Source = "GitHub Actions".
 3. Pushes to `main` auto-deploy.
-4. Access at `https://<username>.github.io/fortune_app_js`.
+4. Access at `https://<username>.github.io/bazi-standalone`.
 
 ### Manual
 
@@ -111,10 +113,10 @@ npm run build
 Configured in `next.config.ts`:
 
 ```ts
-basePath: process.env.NODE_ENV === "production" ? "/fortune_app_js" : "",
+basePath: process.env.NODE_ENV === "production" ? "/bazi-standalone" : "",
 ```
 
-Change `/fortune_app_js` to match your repository name.
+Change `/bazi-standalone` to match your repository name.
 
 ## Key Dependencies
 

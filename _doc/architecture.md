@@ -1,7 +1,7 @@
 # bazi-calculator-standalone — Architecture Reference
 
-> **RETIRED 2026-09-07** (was `fortune_app_js`). Kept for reference; not developed.
-> Sibling paths below are relative to the pre-retirement location one level up.
+> Renamed from `fortune_app_js` on 2026-09-08. Active but **behind** the Python engine —
+> see `../CLAUDE.md` § Catching up for the assessed gap and why the port is deliberately parked.
 
 ## Project Purpose
 
@@ -107,7 +107,7 @@ npm run build    # generates /out static files
 # GitHub Actions auto-deploys on push to main
 ```
 
-Base path is `/fortune_app_js` — configured in `next.config.ts`.
+Base path is `/bazi-standalone` — configured in `next.config.ts`.
 
 ## Reference Docs
 
@@ -122,5 +122,5 @@ Original build artifacts are archived under `_doc/_historical_doc/` (per the `_p
 
 ## Related Projects
 
-- `../../destinyai-backend` — Python FastAPI backend (full-stack version; was `fortune_app`)
-- `../../destinyai-frontend` — Next.js frontend with Google OAuth for `destinyai-backend`. Source of truth for the shadcn primitives mirrored here.
+- `../destinyai-backend` — Python FastAPI backend (full-stack version; was `fortune_app`)
+- `../destinyai-frontend` — Next.js frontend with Google OAuth for `destinyai-backend`. Source of truth for the shadcn primitives mirrored here.

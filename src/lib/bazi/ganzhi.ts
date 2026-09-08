@@ -45,8 +45,8 @@ export const HIDDEN_STEMS: Record<Zhi, { stem: Gan; weight: number }[]> = {
 // 生肖 (Chinese Zodiac)
 export const ZODIAC: Record<Zhi, string> = {
   子: "鼠", 丑: "牛", 寅: "虎", 卯: "兔",
-  辰: "龙", 巳: "蛇", 午: "马", 未: "羊",
-  申: "猴", 酉: "鸡", 戌: "狗", 亥: "猪",
+  辰: "龍", 巳: "蛇", 午: "馬", 未: "羊",
+  申: "猴", 酉: "雞", 戌: "狗", 亥: "豬",
 };
 
 // 五行相生相克
@@ -69,7 +69,7 @@ export const ELEMENT_RELATIONS = {
   } as Record<Element, Element>,
 };
 
-// 时辰对应时间
+// 時辰对应時間
 export const ZHI_TIME: Record<Zhi, string> = {
   子: "23:00-01:00", 丑: "01:00-03:00", 寅: "03:00-05:00", 卯: "05:00-07:00",
   辰: "07:00-09:00", 巳: "09:00-11:00", 午: "11:00-13:00", 未: "13:00-15:00",

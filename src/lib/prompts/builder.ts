@@ -558,7 +558,7 @@ Produce a quantitative luck score for each requested year, blending the natal ch
 
    ② Current DaYun (long-term trend)
      - Does DaYun nourish or attack the Day Master?
-     - Does it trigger key Ten Deities (财/官/印/食傷)?
+     - Does it trigger key Ten Deities (財/官/印/食傷)?
      - Is the DaYun a growth phase, a drain phase, or a correction phase?
      → Sets the multi-year baseline.
 
@@ -642,7 +642,7 @@ Return valid JSON parseable by a frontend, in this exact shape:
       "ganzhi": "${currentYearGanzhi}",
       "luck_scale": 65,
       "assessment": "favorable",
-      "reason": "DaYun nourishes the Day Master; LiuNian 财星 activates — career momentum."
+      "reason": "DaYun nourishes the Day Master; LiuNian 財星 activates — career momentum."
     }
   ]
 }
