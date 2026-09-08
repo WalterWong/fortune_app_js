@@ -1,10 +1,26 @@
 # CLAUDE.md
 
+<!-- status: dormant -->
+
+> **RETIRED 2026-09-07.** This project is no longer developed. It was renamed from
+> `fortune_app_js/` and moved to `destinyai/_retired/bazi-calculator-standalone/`; the
+> GitHub repo `WalterWong/fortune_app_js` is **archived read-only** and its name was kept
+> deliberately so the GitHub Pages URL keeps working. The Pages deploy is still live; CI
+> no longer runs.
+>
+> **The `components/ui/` byte-equivalence obligation with `destinyai-frontend` is over.**
+> That frontend is free to diverge — do not mirror changes into it, and do not treat this
+> repo's primitives as a reference for it.
+>
+> To revive: unarchive on GitHub, move the folder up a level, and re-add it to
+> `../README.md` and `../../../_doc/projects.md`.
+
+
 > Follows the conventions at `../../../_privco/_doc/doc_structure_guideline.md`.
 
 **Standalone** client-side BaZi (八字) calculator in Next.js + TypeScript. **No backend required** — all calculations run in the browser. Uses `lunar-typescript` for Solar→Lunar conversion. Outputs a formatted prompt the user copies into ChatGPT, Claude, Gemini, or any other LLM for interpretation.
 
-This project is independent of `../fortune_app` and `../destinyai-frontend`. It is a self-contained prototype / standalone tool, not part of the paired backend+frontend system. UI primitives are kept byte-equivalent with `../destinyai-frontend/components/ui/` so the two apps share a look-and-feel.
+This project is independent of `../../destinyai-backend` and `../../destinyai-frontend`. It is a self-contained prototype / standalone tool, not part of the paired backend+frontend system. UI primitives are kept byte-equivalent with `../../destinyai-frontend/components/ui/` so the two apps share a look-and-feel.
 
 Deploys to GitHub Pages as a static export.
 
@@ -33,7 +49,7 @@ npx serve out    # preview static build locally
 | `src/lib/i18n/context.tsx` | `LocaleProvider` + `useLocale()`; persists to `localStorage["destinyai.locale"]` |
 | `src/app/page.tsx` | Main UI (input form + all result panels + 中/EN segmented toggle) |
 | `src/app/layout.tsx` | Wraps tree in `LocaleProvider` |
-| `src/components/ui/` | shadcn/ui primitives (button, card, input, label, select) — kept in sync with `../destinyai-frontend/components/ui/` |
+| `src/components/ui/` | shadcn/ui primitives (button, card, input, label, select) — were kept in sync with `../../destinyai-frontend/components/ui/` until retirement |
 | `src/components/ElementLegend.tsx` | 五行 color legend (shown above result panels) |
 | `src/lib/utils.ts` | `cn()` helper for shadcn className composition |
 | `tests/calculator.test.ts` | Vitest round-trip on `calculateBaZi("1990-01-15", "12:00", "男")` |
@@ -54,7 +70,8 @@ npx serve out    # preview static build locally
 - Do not modify `ganzhi.ts`, `data.ts`, or `tenDeities.ts` — validated traditional data
 - Static export base path is `/fortune_app_js` (set in `next.config.ts`)
 - No API calls — if you see a `fetch` or external HTTP call, it's a bug
-- UI primitives mirror `../destinyai-frontend/components/ui/` — when updating one, mirror the change in the other so the two apps stay visually consistent
+- UI primitives were mirrored byte-equivalent from `../../destinyai-frontend/components/ui/` up to
+  retirement. **That obligation ended 2026-09-07** — do not mirror changes in either direction
 - When adding a UI string, add **both** `zh` and `en` entries to `src/lib/i18n/strings.ts` — don't hard-code text in components
 
 ## Reference

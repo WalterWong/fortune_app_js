@@ -1,5 +1,11 @@
 # DestinyAI TypeScript — BaZi Fortune Calculator
 
+> **RETIRED 2026-09-07.** No longer developed. The local folder is now
+> `destinyai/_retired/bazi-calculator-standalone/`, but the **GitHub repo keeps the name
+> `fortune_app_js`** on purpose — the GitHub Pages URL and the `basePath` below depend on it,
+> so every `/fortune_app_js` in this file is correct and must not be "fixed".
+> The Pages deploy is still live; the repo is archived read-only and CI no longer runs.
+
 A pure client-side TypeScript implementation of BaZi (八字) fortune-telling calculations. All calculations run in the browser — no backend required. Deployable to GitHub Pages. Bilingual UI (中/EN) with an in-built LLM prompt builder that targets ChatGPT, Claude, Gemini, or any other LLM.
 
 ## Features
@@ -167,7 +173,7 @@ npm run build      # static-export build (also type-checks)
 
 - Calendar calculations: [lunar-typescript](https://github.com/6tail/lunar-typescript)
 - UI primitives: [shadcn/ui](https://ui.shadcn.com/)
-- Based on traditional BaZi (八字) Chinese metaphysics; ported from the Python `fortune_app` backend.
+- Based on traditional BaZi (八字) Chinese metaphysics; ported from the Python `destinyai-backend` backend (was `fortune_app`).
 
 ## License
 

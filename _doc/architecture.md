@@ -1,4 +1,7 @@
-# fortune_app_js — Architecture Reference
+# bazi-calculator-standalone — Architecture Reference
+
+> **RETIRED 2026-09-07** (was `fortune_app_js`). Kept for reference; not developed.
+> Sibling paths below are relative to the pre-retirement location one level up.
 
 ## Project Purpose
 
@@ -119,5 +122,5 @@ Original build artifacts are archived under `_doc/_historical_doc/` (per the `_p
 
 ## Related Projects
 
-- `../fortune_app` — Python FastAPI backend (full-stack version)
-- `../destinyai-frontend` — Next.js frontend with Google OAuth for `fortune_app`. Source of truth for the shadcn primitives mirrored here.
+- `../../destinyai-backend` — Python FastAPI backend (full-stack version; was `fortune_app`)
+- `../../destinyai-frontend` — Next.js frontend with Google OAuth for `destinyai-backend`. Source of truth for the shadcn primitives mirrored here.
