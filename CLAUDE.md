@@ -1,7 +1,7 @@
 # CLAUDE.md
 
 <!-- status: stale -->
-<!-- next: catch up to the fan canon — port the deterministic chart layer (藏干/十神/marks/大運·流年) from destinyai-backend engine/ once 姨姨's open Q's close; nothing here is wrong, it is BEHIND @claude -->
+<!-- next: PARKED on purpose — port the deterministic chart layer from destinyai-backend engine/ once 姨姨's open Q's close (pack r7 §J Q45–Q46, Q47, Q37–Q44). Nothing here is wrong, it is BEHIND. Read RESUME.md for the gate + porting order @claude -->
 
 > **What this is, and what it is NOT.** `bazi-standalone` is the **no-backend** BaZi app: it
 > computes the chart in the browser, renders the template + annotation labels, and **prepares a
@@ -19,7 +19,7 @@
 
 **Standalone** client-side BaZi (八字) calculator in Next.js + TypeScript. **No backend required** — all calculations run in the browser. Uses `lunar-typescript` for Solar→Lunar conversion. Outputs a formatted prompt the user copies into ChatGPT, Claude, Gemini, or any other LLM for interpretation.
 
-This project is independent of `../destinyai-backend` and `../destinyai-frontend`. It is a self-contained prototype / standalone tool, not part of the paired backend+frontend system. UI primitives are kept byte-equivalent with `../destinyai-frontend/components/ui/` so the two apps share a look-and-feel.
+This project is independent of `../destinyai-backend` and `../destinyai-frontend`. It is a self-contained standalone tool, not part of the paired backend+frontend system. Its UI primitives *started* byte-equivalent with `../destinyai-frontend/components/ui/`, which is why the two look alike — but that two-way obligation is retired (see Critical below); they may now diverge.
 
 Deploys to GitHub Pages as a static export.
 
@@ -78,6 +78,7 @@ npx serve out    # preview static build locally
 
 ## Reference
 
+- **`RESUME.md`** — paste-ready cold-resume prompt + ordered reading list + the porting order for when the canon unblocks. Read this first on a cold start.
 - `_doc/architecture.md` — calculation pipeline, type definitions, tech stack, deployment notes
 - `_doc/260516_shadcn_i18n_refactor.md` — session log: shadcn migration, calendar year on 大運, prev-1/+5 流年, 中/EN toggle, EN prompt templates
 - `_doc/_historical_doc/260119_project.md` — original plan (archived)
